@@ -680,3 +680,5 @@
     .hero h1 { font-size: clamp(40px, 9vw, 58px); }
     .neon-box { max-width: 440px; }
   }
+
+:root { --asset-rebuild: 20260823; } /* 触发哈希变更以绕过边缘缓存的404 */
