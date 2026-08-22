@@ -44,7 +44,7 @@ export default function PlanetIntro({ done, onEnter }) {
         canvas.style.height = h + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         cx = w / 2; cy = h * 0.42;
-        R = Math.min(w, h) * 0.17;
+        R = Math.min(w, h) * 0.26; // 星球放大（直径 52vmin，与按钮热区一致）
         const starCount = Math.max(50, Math.min(mobile ? 80 : 130, Math.round(w / (mobile ? 14 : 9))));
         stars = Array.from({ length: starCount }, () => ({
           x: Math.random() * w, y: Math.random() * h,
@@ -211,7 +211,6 @@ export default function PlanetIntro({ done, onEnter }) {
             aria-label="点击星球，进入 OpenUMR"
             onClick={handleEnter}
           ></button>
-          <div className="planet-hint">点击星球，进入 OpenUMR</div>
         </>
       )}
       <div className="planet-brand" aria-hidden="true">

@@ -30,25 +30,16 @@
   #intro.done { opacity: 0; pointer-events: none; transform: scale(1.03); }
   .planet-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-  /* 星球点击热区：与画布星球同心同尺寸（半径 = 17vmin），原生支持 Enter/Space */
+  /* 星球点击热区：与画布星球同心同尺寸（半径 = 26vmin），原生支持 Enter/Space */
   .planet-btn {
     position: absolute; left: 50%; top: 42%;
-    width: 34vmin; height: 34vmin; min-width: 150px; min-height: 150px;
+    width: 52vmin; height: 52vmin; min-width: 170px; min-height: 170px;
     transform: translate(-50%, -50%);
     border-radius: 50%; background: transparent; border: none; padding: 0; cursor: pointer;
     -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   }
   .planet-btn:hover { box-shadow: 0 0 70px 12px rgba(99,102,241,.3); }
   .planet-btn:focus-visible { outline: 2px solid rgba(129,140,248,.85); outline-offset: 10px; }
-
-  .planet-hint {
-    position: absolute; left: 50%; top: calc(42% + 23vmin);
-    transform: translateX(-50%);
-    font-size: clamp(13px, 2.2vw, 16px); letter-spacing: .3em; padding-left: .3em;
-    color: var(--muted); text-align: center; white-space: nowrap;
-    animation: hint-pulse 2.6s ease-in-out infinite;
-  }
-  @keyframes hint-pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
 
   .planet-brand {
     position: absolute; top: 26px; left: 4vw;
@@ -64,7 +55,7 @@
   /* Canvas 不可用时的 CSS 降级星球（按钮仍可点击进入） */
   .planet-css {
     position: absolute; left: 50%; top: 42%; transform: translate(-50%,-50%);
-    width: 34vmin; height: 34vmin; border-radius: 50%;
+    width: 52vmin; height: 52vmin; border-radius: 50%;
     background: radial-gradient(circle at 34% 30%, #b3bcff 0%, #7d80f2 30%, #4f46b8 55%, #2a2470 78%, #16113c 100%);
     box-shadow: 0 0 60px 8px rgba(99,102,241,.35), 0 0 160px 40px rgba(99,102,241,.12);
   }
@@ -309,9 +300,8 @@
   }
   footer .disclaimer { color: #79839e; font-size: 11px; }
 
-  /* 无障碍：系统开启「减少动态效果」时减弱开场（星球静止、提示不闪动），仍需点击进入 */
+  /* 无障碍：系统开启「减少动态效果」时减弱开场（星球静止），仍需点击进入 */
   @media (prefers-reduced-motion: reduce) {
-    .planet-hint { animation: none; opacity: .9; }
     #main { opacity: 1; clip-path: none; }
     .noise { animation: none; }
     .neon-box, .neon-box::before { animation: none; }
