@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 // 数据大厅密码门：密码以 SHA-256 哈希存储，不保存明文（前端防护为轻量级，防误入/路人）
-const GATE_HASH = 'bf6a02905f2c52e0946ff56f747b4aeb928fad67d1e74fd635d49a26ae37cae1';
+const GATE_HASH = 'b9aeb46c5d515708882081050fd1c38ce58c2b064bad170b173882dc42325864';
 
 async function sha256Hex(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
