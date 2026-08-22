@@ -1,10 +1,12 @@
+import IconMark from './IconMark.jsx';
+
 export default function SiteFooter({ onOpenGate }) {
   return (
     <footer className="site-foot">
       <div className="f-grid">
         <div className="f-col">
           <div className="brand">
-            <div className="brand-mark">UMR</div>
+            <div className="brand-mark"><IconMark /></div>
             <div>Open<span>UMR</span></div>
           </div>
           <div className="f-tagline">开放的数据，看见真实。个人项目：代码、数据管道与计算逻辑全部公开，欢迎监督与贡献。</div>

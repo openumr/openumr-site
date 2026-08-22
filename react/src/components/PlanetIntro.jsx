@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import IconMark from './IconMark.jsx';
 
 // 开场：星球入场 —— Canvas 2D 程序化渲染（星空 + 自转星球 + 轨道粒子环），无外部素材。
 // 仅当用户点击星球（或按钮聚焦后按 Enter/Space）才进入主页；无自动跳转。
@@ -199,7 +200,7 @@ export default function PlanetIntro({ done, onEnter }) {
         </>
       )}
       <div className="planet-brand" aria-hidden="true">
-        <div className="b-mark">UMR</div>
+        <div className="b-mark"><IconMark /></div>
         <div>OPEN · UMR</div>
       </div>
     </div>

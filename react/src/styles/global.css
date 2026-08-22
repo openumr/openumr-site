@@ -93,10 +93,9 @@
     font-size: 12.5px; letter-spacing: .28em; color: var(--muted);
   }
   .planet-brand .b-mark {
-    width: 26px; height: 26px; border-radius: 7px; font-size: 8px; font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center; color: #fff; letter-spacing: 0;
+    width: 26px; height: 26px; border-radius: 7px; overflow: hidden; flex-shrink: 0;
   }
+  .planet-brand .b-mark svg { width: 100%; height: 100%; display: block; }
 
   /* Canvas 不可用时的 CSS 降级星球（按钮仍可点击进入） */
   .planet-css {
@@ -139,12 +138,11 @@
   @keyframes fade-up { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
   .brand { display: flex; align-items: center; gap: 11px; font-weight: 700; font-size: 17px; letter-spacing: .04em; }
   .brand-mark {
-    width: 36px; height: 36px; border-radius: 9px;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 800;
-    letter-spacing: -0.3px;
-    box-shadow: 0 4px 18px rgba(99,102,241,.45);
+    width: 36px; height: 36px; border-radius: 9px; overflow: hidden;
+    box-shadow: 0 4px 14px rgba(5,7,13,.45);
+    flex-shrink: 0;
   }
+  .brand-mark svg { width: 100%; height: 100%; display: block; }
   .brand span { color: var(--accent); }
   /* Framer 式导航链接 */
   .nav-links { display: flex; align-items: center; gap: 32px; font-size: 14px; line-height: 1.5; }

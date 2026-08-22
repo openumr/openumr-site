@@ -1,8 +1,10 @@
+import IconMark from './IconMark.jsx';
+
 export default function Nav({ onOpenGate }) {
   return (
     <nav>
       <div className="brand">
-        <div className="brand-mark">UMR</div>
+        <div className="brand-mark"><IconMark /></div>
         <div>Open<span>UMR</span></div>
       </div>
       <div className="nav-links">
