@@ -30,6 +30,51 @@
   #intro.done { opacity: 0; pointer-events: none; transform: scale(1.03); }
   .planet-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
+  /* 动态星空（CSS）：三层 box-shadow 星点（阴影色取 currentColor），不同节奏闪烁 + 微视差 */
+  .sky-stars {
+    position: absolute; top: 0; left: 0; width: 1px; height: 1px;
+    border-radius: 50%; background: transparent;
+    will-change: opacity, transform;
+  }
+  .sky-stars.s1 {
+    color: rgba(205,225,255,.7);
+    box-shadow: 88.3vw 29.3vh, 55.6vw 45.1vh, 66.0vw 86.9vh, 19.7vw 61.7vh, 70.1vw 32.7vh, 94.8vw 22.1vh, 69.6vw 67.3vh, 41.0vw 23.1vh, 50.9vw 37.5vh, 17.3vw 73.1vh, 70.1vw 94.4vh, 31.7vw 85.9vh, 61.8vw 51.3vh, 1.6vw 48.4vh, 82.5vw 37.2vh, 29.7vw 9.7vh, 37.1vw 71.0vh, 11.2vw 63.4vh, 26.2vw 66.8vh, 94.4vw 21.6vh, 76.6vw 12.9vh, 55.6vw 85.3vh, 14.5vw 19.0vh, 98.7vw 89.3vh, 59.5vw 56.2vh, 94.2vw 63.7vh, 4.7vw 14.2vh, 62.9vw 60.7vh, 34.7vw 17.5vh, 69.2vw 33.3vh, 11.7vw 61.1vh, 31.2vw 82.0vh, 36.8vw 27.8vh, 15.6vw 20.1vh, 87.4vw 20.1vh, 47.6vw 33.8vh, 43.0vw 72.0vh, 21.9vw 82.3vh, 45.2vw 41.2vh, 42.7vw 88.5vh, 39.5vw 26.1vh, 74.0vw 79.1vh, 72.8vw 52.8vh, 70.9vw 73.7vh, 33.4vw 21.1vh, 53.4vw 65.4vh, 66.8vw 47.4vh, 52.3vw 79.5vh, 85.8vw 51.9vh, 13.6vw 92.4vh, 78.0vw 97.6vh, 59.8vw 16.0vh, 92.4vw 10.6vh, 34.7vw 76.4vh, 25.0vw 77.9vh, 81.5vw 28.7vh, 92.7vw 35.1vh, 48.7vw 67.9vh;
+    animation: sky-twinkle 5.2s ease-in-out infinite;
+  }
+  .sky-stars.s2 {
+    color: rgba(228,240,255,.85);
+    box-shadow: 93.6vw 68.4vh, 23.0vw 74.5vh, 74.6vw 11.2vh, 24.9vw 2.9vh, 97.4vw 41.4vh, 77.4vw 14.3vh, 94.1vw 46.0vh, 7.6vw 23.9vh, 84.9vw 1.4vh, 51.3vw 37.9vh, 63.5vw 92.2vh, 90.4vw 81.3vh, 60.4vw 60.7vh, 48.7vw 62.4vh, 69.1vw 62.6vh, 60.0vw 68.9vh, 4.1vw 34.2vh, 23.9vw 37.1vh, 84.3vw 55.6vh, 57.2vw 35.4vh, 91.7vw 34.9vh, 49.4vw 81.8vh, 24.6vw 75.0vh, 13.6vw 8.4vh, 90.5vw 92.1vh, 63.8vw 60.7vh, 48.2vw 80.6vh, 77.0vw 21.8vh, 60.9vw 37.0vh, 45.1vw 3.6vh, 43.3vw 28.0vh, 85.5vw 94.8vh, 61.6vw 54.6vh, 85.4vw 68.9vh;
+    animation: sky-twinkle 7.6s ease-in-out 1.4s infinite;
+  }
+  .sky-stars.s3 {
+    color: rgba(240,247,255,.95);
+    box-shadow: 63.3vw 90.3vh 3px 1px, 48.1vw 69.4vh 3px 1px, 97.2vw 63.2vh 3px 1px, 3.8vw 74.7vh 3px 1px, 5.8vw 43.8vh 3px 1px, 4.4vw 10.7vh 3px 1px, 93.7vw 50.1vh 3px 1px, 35.2vw 31.9vh 3px 1px, 25.9vw 44.9vh 3px 1px, 47.8vw 66.2vh 3px 1px, 36.0vw 18.1vh 3px 1px, 79.1vw 50.3vh 3px 1px, 90.7vw 72.0vh 3px 1px, 63.4vw 16.1vh 3px 1px;
+    animation: sky-twinkle 9.3s ease-in-out 2.7s infinite;
+  }
+  @keyframes sky-twinkle {
+    0%, 100% { opacity: .45; transform: translate(0, 0); }
+    50% { opacity: 1; transform: translate(.25vw, -.2vh); }
+  }
+
+  /* 流星：三条错峰划过的光条，沿自身轴向左下飞行（画布在其上，从星球背后划过） */
+  .meteor {
+    position: absolute; width: 130px; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, rgba(190,215,255,0) 0%, rgba(190,215,255,.5) 55%, rgba(243,248,255,.95) 100%);
+    filter: drop-shadow(0 0 4px rgba(170,200,255,.55));
+    opacity: 0; transform: rotate(145deg);
+    animation: meteor-fly var(--dur) linear var(--delay) infinite;
+    will-change: transform, opacity;
+  }
+  .meteor.m1 { top: 14%; left: 72%; --dur: 9s; --delay: 1.2s; }
+  .meteor.m2 { top: 30%; left: 92%; --dur: 13s; --delay: 6.4s; width: 100px; }
+  .meteor.m3 { top: 6%; left: 45%; --dur: 15s; --delay: 10.5s; width: 160px; }
+  @keyframes meteor-fly {
+    0% { opacity: 0; transform: rotate(145deg) translateX(0); }
+    3% { opacity: 1; }
+    9% { opacity: 0; transform: rotate(145deg) translateX(58vmax); }
+    100% { opacity: 0; transform: rotate(145deg) translateX(58vmax); }
+  }
+
   /* 星球点击热区：与画布星球同心同尺寸（半径 = 26vmin），原生支持 Enter/Space */
   .planet-btn {
     position: absolute; left: 50%; top: 42%;
@@ -300,8 +345,10 @@
   }
   footer .disclaimer { color: #79839e; font-size: 11px; }
 
-  /* 无障碍：系统开启「减少动态效果」时减弱开场（星球静止），仍需点击进入 */
+  /* 无障碍：系统开启「减少动态效果」时减弱开场（星球静止、星空不闪、流星停用），仍需点击进入 */
   @media (prefers-reduced-motion: reduce) {
+    .sky-stars { animation: none; opacity: .8; }
+    .meteor { display: none; }
     #main { opacity: 1; clip-path: none; }
     .noise { animation: none; }
     .neon-box, .neon-box::before { animation: none; }

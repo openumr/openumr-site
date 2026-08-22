@@ -21,7 +21,7 @@ export default function PlanetIntro({ done, onEnter }) {
       const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2);
 
       let w = 0, h = 0, cx = 0, cy = 0, R = 0;
-      let stars = [], orbiters = [];
+      let orbiters = [];
 
       // 星球表面斑块：确定性伪随机（每次刷新观感一致），球面经度投影实现自转
       let seed = 42;
@@ -45,15 +45,6 @@ export default function PlanetIntro({ done, onEnter }) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         cx = w / 2; cy = h * 0.42;
         R = Math.min(w, h) * 0.26; // 星球放大（直径 52vmin，与按钮热区一致）
-        const starCount = Math.max(50, Math.min(mobile ? 80 : 130, Math.round(w / (mobile ? 14 : 9))));
-        stars = Array.from({ length: starCount }, () => ({
-          x: Math.random() * w, y: Math.random() * h,
-          r: 0.5 + Math.random() * 1.2,
-          base: 0.25 + Math.random() * 0.6,
-          spd: 0.5 + Math.random() * 1.5,
-          ph: Math.random() * Math.PI * 2,
-          purple: Math.random() < 0.25,
-        }));
         orbiters = Array.from({ length: mobile ? 18 : 34 }, () => ({
           a0: Math.random() * Math.PI * 2,
           spd: (0.15 + Math.random() * 0.45) * (Math.random() < 0.85 ? 1 : -1),
@@ -91,18 +82,6 @@ export default function PlanetIntro({ done, onEnter }) {
         const zoom = reduced ? 1 + 2.5 * e * e : 1 + 13 * e * e * e;
 
         ctx.clearRect(0, 0, w, h);
-
-        // 星空（过渡时向外扩散，营造前进感）
-        const zo = 1 + 0.5 * e;
-        for (const s of stars) {
-          const a = reduced ? s.base : s.base * (0.6 + 0.4 * Math.sin(t * s.spd + s.ph));
-          const x = cx + (s.x - cx) * zo, y = cy + (s.y - cy) * zo;
-          if (x < -4 || x > w + 4 || y < -4 || y > h + 4) continue;
-          ctx.beginPath();
-          ctx.arc(x, y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = s.purple ? 'rgba(168,139,250,' + a.toFixed(3) + ')' : 'rgba(255,255,255,' + a.toFixed(3) + ')';
-          ctx.fill();
-        }
 
         const PR = R * zoom;
         const fade = 1 - e;
@@ -200,6 +179,12 @@ export default function PlanetIntro({ done, onEnter }) {
 
   return (
     <div id="intro" className={done ? 'done' : ''}>
+      <div className="sky-stars s1" aria-hidden="true"></div>
+      <div className="sky-stars s2" aria-hidden="true"></div>
+      <div className="sky-stars s3" aria-hidden="true"></div>
+      <i className="meteor m1" aria-hidden="true"></i>
+      <i className="meteor m2" aria-hidden="true"></i>
+      <i className="meteor m3" aria-hidden="true"></i>
       {canvasFailed && <div className="planet-css" aria-hidden="true"></div>}
       <canvas ref={canvasRef} className="planet-canvas" aria-hidden="true"></canvas>
       {!locked && !done && (
