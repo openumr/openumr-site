@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenUMR US Stock Quotes API
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/openumr_api.py
+Restart=always
+RestartSec=5
+WorkingDirectory=/opt
+
+[Install]
+WantedBy=multi-user.target

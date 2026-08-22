@@ -1,0 +1,4 @@
+# 打包产物和副本不入库
+openumr_site.zip
+deploy/
+*.log
