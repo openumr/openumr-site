@@ -28,12 +28,13 @@
   }
   /* 退场：整体淡出 + 轻微放大，与主内容 clip-path 揭开交叉溶解 */
   #intro.done { opacity: 0; pointer-events: none; transform: scale(1.03); }
-  .planet-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* 画布只负责渲染，不接收鼠标事件（点击由上方透明按钮处理）——右键不再出现「保存图片」 */
+  .planet-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
   /* 动态星空（CSS）：三层 box-shadow 星点（阴影色取 currentColor），不同节奏闪烁 + 微视差 */
   .sky-stars {
     position: absolute; top: 0; left: 0; width: 1px; height: 1px;
-    border-radius: 50%; background: transparent;
+    border-radius: 50%; background: transparent; pointer-events: none;
     will-change: opacity, transform;
   }
   .sky-stars.s1 {
@@ -61,7 +62,7 @@
     position: absolute; width: 130px; height: 2px; border-radius: 2px;
     background: linear-gradient(90deg, rgba(190,215,255,0) 0%, rgba(190,215,255,.5) 55%, rgba(243,248,255,.95) 100%);
     filter: drop-shadow(0 0 4px rgba(170,200,255,.55));
-    opacity: 0; transform: rotate(145deg);
+    opacity: 0; transform: rotate(145deg); pointer-events: none;
     animation: meteor-fly var(--dur) linear var(--delay) infinite;
     will-change: transform, opacity;
   }
